@@ -2,6 +2,7 @@ const { Router } = require('express');
 // const User = require('./app/models/User');
 const UserController = require('./app/controllers/UserController');
 const SessionController = require('./app/controllers/SessionController');
+const FoodController = require('./app/controllers/FoodController');
 
 const authMiddleware = require('./app/middlewares/auth');
 
@@ -25,6 +26,8 @@ routes.post('/sessions', SessionController.store);
 // aplica o middleware em todas as rotas apos
 routes.use(authMiddleware);
 
-routes.put('/users', authMiddleware, UserController.update);
+routes.put('/users', UserController.update);
+
+routes.post('/food', FoodController.store);
 
 module.exports = routes;
