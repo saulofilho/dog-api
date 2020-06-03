@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">13.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/16</span>
+                <span class='fraction'>2/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">13.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/16</span>
+                <span class='fraction'>2/15</span>
             </div>
         
             
@@ -114,27 +114,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -165,29 +165,29 @@
 &nbsp;
 class FoodController {
 <span class="fstat-no" title="function not covered" >  as</span>ync index(req, res) {
-    const { food } = <span class="cstat-no" title="statement not covered" >req.query;</span>
-&nbsp;
-    // try {
-    //   if (typeof req.query.food !== 'undefined') {
-    //     const foods = await Food.findAll({ where: { food } });
-    //     return res.json(foods);
-    //   } else {
-    //     const foods = await Food.findAll();
-    //     return res.json(foods);
-    //   }
-    // } catch (err) {
-    //   return err.json({ error: '[100] Not search params text in query.' });
-    // }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    if (req.query.food) {</span>
-      const foods = <span class="cstat-no" title="statement not covered" >await Food.findAll({ where: { food } });</span>
-<span class="cstat-no" title="statement not covered" >      return res.json(foods);</span>
-    } else <span class="cstat-no" title="statement not covered" >if (req) {</span>
-      const foods = <span class="cstat-no" title="statement not covered" >await Food.findAll();</span>
-<span class="cstat-no" title="statement not covered" >      return res.json(foods);</span>
-    } else {
-<span class="cstat-no" title="statement not covered" >      return res.json({ error: '[100] Not search params text in query.' });</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      if (typeof req.query.food !== 'undefined') {</span>
+        const foods = <span class="cstat-no" title="statement not covered" >await Food.findAll({ where: { food: req.query.food } });</span>
+<span class="cstat-no" title="statement not covered" >        return res.json(foods);</span>
+      } else {
+        const foods = <span class="cstat-no" title="statement not covered" >await Food.findAll();</span>
+<span class="cstat-no" title="statement not covered" >        return res.json(foods);</span>
+      }
+    } catch (err) {
+<span class="cstat-no" title="statement not covered" >      return err.json({ error: '[100] Not search params text in query.' });</span>
     }
+&nbsp;
+    // if (typeof req.query.food !== 'undefined') {
+    //   const searchFood = await Food.findAll({
+    //     where: { food: req.query.food },
+    //   });
+    //   return res.json(searchFood);
+    // } else if (typeof req.query.food === []) {
+    //   return res.json({ error: '[100] Not search params text in query.' });
+    // } else {
+    //   const foods = await Food.findAll();
+    //   return res.json(foods);
+    // }
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  as</span>ync store(req, res) {
@@ -220,7 +220,7 @@ module.exports = new FoodController();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Jun 03 2020 14:33:43 GMT-0300 (Brasilia Standard Time)
+                at Wed Jun 03 2020 17:43:21 GMT-0300 (Brasilia Standard Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

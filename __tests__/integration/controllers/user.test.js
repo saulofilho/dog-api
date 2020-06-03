@@ -3,12 +3,12 @@ const bcrypt = require('bcryptjs');
 const app = require('../../../src/app');
 
 // const User = require('../../../src/app/models/User');
-const factory = require('../factories');
+const factory = require('../../factories');
 const truncate = require('../../util/truncate');
 
 describe('User', () => {
   beforeEach(async () => {
-    await truncate();
+    await truncate;
   });
 
   it('should encrypt user password when new user created', async () => {
