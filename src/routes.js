@@ -4,6 +4,11 @@ const UserController = require('./app/controllers/UserController');
 const SessionController = require('./app/controllers/SessionController');
 const FoodController = require('./app/controllers/FoodController');
 
+const validateUserStore = require('./app/validators/UserStore');
+const validateUserUpdate = require('./app/validators/UserUpdate');
+const validateSessionStore = require('./app/validators/SessionStore');
+const validateFoodStore = require('./app/validators/FoodStore');
+
 const authMiddleware = require('./app/middlewares/auth');
 
 const routes = new Router();
@@ -18,16 +23,19 @@ const routes = new Router();
 //   return res.json(user);
 // });
 
-routes.post('/users', UserController.store);
-routes.post('/sessions', SessionController.store);
+routes.post('/users', validateUserStore, UserController.store);
+routes.post('/sessions', validateSessionStore, SessionController.store);
 
 // routes.put('/users', authMiddleware, UserController.update);
 
-// aplica o middleware em todas as rotas apos
+routes.get('/food', FoodController.index);
+
+// aplica o middleware em todas as rotas abaixo
 routes.use(authMiddleware);
 
-routes.put('/users', UserController.update);
+routes.put('/users', validateUserUpdate, UserController.update);
 
-routes.post('/food', FoodController.store);
+routes.post('/food', validateFoodStore, FoodController.store);
+routes.delete('/food/:id', FoodController.delete);
 
 module.exports = routes;
