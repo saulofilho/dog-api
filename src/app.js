@@ -1,4 +1,4 @@
-require('dotenv/config');
+require('./bootstrap');
 
 const cors = require('cors');
 const helmet = require('helmet');
