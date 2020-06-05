@@ -13,18 +13,6 @@ class FoodController {
     } catch (err) {
       return err.json({ error: '[100] Not search params text in query.' });
     }
-
-    // if (typeof req.query.food !== 'undefined') {
-    //   const searchFood = await Food.findAll({
-    //     where: { food: req.query.food },
-    //   });
-    //   return res.json(searchFood);
-    // } else if (typeof req.query.food === []) {
-    //   return res.json({ error: '[100] Not search params text in query.' });
-    // } else {
-    //   const foods = await Food.findAll();
-    //   return res.json(foods);
-    // }
   }
 
   async store(req, res) {
@@ -46,6 +34,40 @@ class FoodController {
     await food.destroy();
 
     return res.json(food);
+  }
+
+  async update(req, res) {
+    const { food, eat, infos } = req.body;
+
+    const foodEdit = await Food.findOne({ where: { food: req.body.food } });
+
+    console.log(foodEdit);
+
+    if (foodEdit === null) {
+      res.json({ error: 'Food not found!' });
+      console.log('Not found!');
+    } else {
+      const foodEdit = await Food.update(
+        {
+          food,
+          eat,
+          infos,
+        },
+        {
+          where: {
+            food,
+          },
+        }
+      );
+      console.log(foodEdit instanceof Food);
+      console.log(foodEdit.food);
+    }
+
+    return res.json({
+      food,
+      eat,
+      infos,
+    });
   }
 }
 
