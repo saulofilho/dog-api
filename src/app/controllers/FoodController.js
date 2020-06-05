@@ -1,17 +1,21 @@
 const Food = require('../models/Food');
 
 class FoodController {
+  async indexAll(req, res) {
+    const foods = await Food.findAll();
+
+    res.json(foods);
+  }
+
   async index(req, res) {
-    try {
-      if (typeof req.query.food !== 'undefined') {
-        const foods = await Food.findAll({ where: { food: req.query.food } });
-        return res.json(foods);
-      } else {
-        const foods = await Food.findAll();
-        return res.json(foods);
-      }
-    } catch (err) {
-      return err.json({ error: '[100] Not search params text in query.' });
+    const { food } = req.query;
+
+    const foodItem = await Food.findOne({ where: { food: food } });
+
+    if (foodItem === null) {
+      res.json({ error: 'Food not found!' });
+    } else {
+      res.json(foodItem);
     }
   }
 
@@ -41,11 +45,8 @@ class FoodController {
 
     const foodEdit = await Food.findOne({ where: { food: req.body.food } });
 
-    console.log(foodEdit);
-
     if (foodEdit === null) {
       res.json({ error: 'Food not found!' });
-      console.log('Not found!');
     } else {
       const foodEdit = await Food.update(
         {

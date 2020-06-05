@@ -19,6 +19,7 @@ routes.post('/sessions', validateSessionStore, SessionController.store);
 
 // routes.put('/users', authMiddleware, UserController.update);
 
+routes.get('/foods', FoodController.indexAll);
 routes.get('/food', FoodController.index);
 
 // aplica o middleware em todas as rotas abaixo
